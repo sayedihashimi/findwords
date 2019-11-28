@@ -21,5 +21,23 @@ namespace FindWords.Test {
             Assert.False(tree.IsWord("c"));
             Assert.False(tree.IsWord("ca"));
         }
+
+        [Fact]
+        public void TestIsWordReturnsFalse() {
+            var tree = new WordTree();
+            Assert.False(tree.IsWord("cat"));
+            Assert.False(tree.IsWord("dog"));
+        }
+
+        [Fact]
+        public void TestIsCarWordWhenCareIsInsertedBeforeCar() {
+            var tree = new WordTree();
+            tree.AddWord("cat");
+            tree.AddWord("care");
+            tree.AddWord("car");
+            Assert.True(tree.IsWord("car"));
+            Assert.True(tree.IsWord("care"));
+        }
+
     }
 }
