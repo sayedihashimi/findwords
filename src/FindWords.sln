@@ -1,0 +1,29 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FindWords.Web", "FindWords.Web\FindWords.Web.csproj", "{C6931608-1A76-4711-A17A-940B36256B38}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FindWords.Shared", "FindWords.Shared\FindWords.Shared.csproj", "{F62CEB67-45D5-40A6-90A4-92A44AADE374}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FindWords.Test", "FindWords.Test\FindWords.Test.csproj", "{EF2150FE-E4A6-4022-A4AB-81BE2F153FD2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C6931608-1A76-4711-A17A-940B36256B38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6931608-1A76-4711-A17A-940B36256B38}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6931608-1A76-4711-A17A-940B36256B38}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6931608-1A76-4711-A17A-940B36256B38}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F62CEB67-45D5-40A6-90A4-92A44AADE374}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F62CEB67-45D5-40A6-90A4-92A44AADE374}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F62CEB67-45D5-40A6-90A4-92A44AADE374}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F62CEB67-45D5-40A6-90A4-92A44AADE374}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF2150FE-E4A6-4022-A4AB-81BE2F153FD2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF2150FE-E4A6-4022-A4AB-81BE2F153FD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF2150FE-E4A6-4022-A4AB-81BE2F153FD2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF2150FE-E4A6-4022-A4AB-81BE2F153FD2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
