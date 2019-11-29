@@ -38,6 +38,5 @@ namespace FindWords.Test {
             Assert.True(tree.IsWord("car"));
             Assert.True(tree.IsWord("care"));
         }
-
     }
 }

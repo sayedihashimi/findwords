@@ -17,4 +17,12 @@
     <ProjectReference Include="..\FindWords.Shared\FindWords.Shared.csproj" />
     <ProjectReference Include="..\FindWords.Web\FindWords.Web.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <None Remove="assets\words_alpha.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="assets\words_alpha.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
 </Project>

@@ -1,0 +1,22 @@
+﻿using System;
+using System.IO;
+using System.Threading.Tasks;
+
+namespace FindWords.Test {
+    public class FileHelper {
+        public async Task<string> CreateTempFileWithContentAsync(string content) {
+            string tempfilepath = Path.GetTempFileName();
+
+            using var fileStream = new FileStream(tempfilepath, FileMode.OpenOrCreate, FileAccess.Write);
+            using var fileWriter = new StreamWriter(fileStream);
+
+            string[] contentLines = content.Split("\n", StringSplitOptions.RemoveEmptyEntries);
+
+            foreach(var line in contentLines) {
+                await fileWriter.WriteLineAsync(line);
+            }
+
+            return tempfilepath;
+        }
+    }
+}
