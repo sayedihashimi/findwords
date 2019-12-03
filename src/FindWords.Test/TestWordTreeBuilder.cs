@@ -31,8 +31,8 @@ accommodable";
             [Fact]
             public async Task ReadRealFile() {
                 IWordTree tree = await new WordTreeBuilder().BuildFromDictionaryFileAsync(
-                    GetPathToRealDictionaryFile());
-
+                    new FileHelper().GetPathToRealDictionaryFile());
+                
                 Assert.True(tree.IsWord("rubiaceae"));
                 Assert.True(tree.IsWord("katsuwonidae"));
                 Assert.True(tree.IsWord("ritualistically"));
@@ -63,18 +63,6 @@ accommodable";
 
             //    await outputWriter.FlushAsync();
             //}
-
-            internal string GetPathToRealDictionaryFile() {
-                return Path.Combine(GetApplicationRoot(), "assets/words_alpha.txt");
-            }
-
-            internal string GetApplicationRoot() {
-                var exePath = Path.GetDirectoryName(System.Reflection
-                                  .Assembly.GetExecutingAssembly().CodeBase);
-                Regex appPathMatcher = new Regex(@"(?<!fil)[A-Za-z]:\\+[\S\s]*?(?=\\+bin)");
-                var appRoot = appPathMatcher.Match(exePath).Value;
-                return appRoot;
-            }
         }
     }
 }

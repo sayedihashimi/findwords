@@ -10,7 +10,7 @@ namespace FindWords.Shared {
             Debug.Assert(str != null);
             return Permute(str, 0, str.Length - 1);
         }
-        // https://www.geeksforgeeks.org/c-program-to-print-all-permutations-of-a-given-string-2/
+        // based on https://www.geeksforgeeks.org/c-program-to-print-all-permutations-of-a-given-string-2/
         private IEnumerable<string> Permute(string str, int l, int r) {
             List<string> results = new List<string>();
             if (l == r) {
