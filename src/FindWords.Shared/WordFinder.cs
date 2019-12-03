@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 
 namespace FindWords.Shared {
@@ -48,7 +49,9 @@ namespace FindWords.Shared {
 
                 Console.WriteLine(newprefix);
                 // TODO: Update wortree to use char[]
-                if (WordTree.IsWord(new string(newprefix))) {
+                var newprefixstr = new string(newprefix);
+                if (newprefixstr.Length >= MinWordLength &&
+                    WordTree.IsWord(newprefixstr)) {
                     found.Add(newprefix);
                 }
 

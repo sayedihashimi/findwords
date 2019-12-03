@@ -13,6 +13,7 @@ namespace FindWords.Test {
                 WordFinder finder = new WordFinder(await BuildWordTreeAsync());
 
                 var found = finder.FindWordsInString(str);
+
                 Assert.NotNull(found);
                 Assert.Equal(35, found.Count);
             }
