@@ -12,12 +12,18 @@ namespace FindWords.Shared {
             Debug.Assert(File.Exists(filepath));
 
             using var fileStream = new FileStream(filepath, FileMode.Open, FileAccess.Read);
-            using var reader = new StreamReader(fileStream);
+            return await BuildFrom(fileStream);
+        }
+
+        public async Task<IWordTree>BuildFrom(Stream stream) {
+            Debug.Assert(stream != null);
+
+            using var reader = new StreamReader(stream);
 
             IWordTree tree = new WordTree();
             int linesProcessed = 0;
             string currentLine;
-            while( (currentLine = await reader.ReadLineAsync()) != null) {
+            while ((currentLine = await reader.ReadLineAsync()) != null) {
                 tree.AddWord(currentLine);
                 linesProcessed++;
             }

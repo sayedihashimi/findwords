@@ -21,7 +21,11 @@ namespace FindWords.Test {
         }
 
         public string GetPathToRealDictionaryFile() {
-            return Path.Combine(GetApplicationRoot(), "assets/words_alpha.txt");
+            return Path.Combine(GetApplicationRoot(), "assets","words_alpha.txt");
+        }
+
+        public string GetPathToCspellDictionaryFile() {
+            return Path.Combine(GetApplicationRoot(), "assets", "cspell-filtered_en_US.txt");
         }
 
         public string GetApplicationRoot() {

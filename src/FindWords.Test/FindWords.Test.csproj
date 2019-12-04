@@ -19,9 +19,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Remove="assets\words_alpha.txt" />
+    <None Remove="assets\cspell-en_US.txt" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\words_alpha.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\cspell-en_US.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
