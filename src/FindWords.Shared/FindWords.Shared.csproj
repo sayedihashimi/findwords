@@ -13,14 +13,14 @@
     <None Remove="assets\words_alpha.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="assets\cspell-filtered_en_US.txt">
+    <EmbeddedResource Include="assets\cspell-filtered_en_US.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="assets\sixletterwords.txt">
+    </EmbeddedResource>
+    <EmbeddedResource Include="assets\sixletterwords.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="assets\words_alpha.txt">
+    </EmbeddedResource>
+    <EmbeddedResource Include="assets\words_alpha.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>
