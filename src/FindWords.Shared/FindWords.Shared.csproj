@@ -11,6 +11,7 @@
     <None Remove="assets\cspell-filtered_en_US.txt" />
     <None Remove="assets\sixletterwords.txt" />
     <None Remove="assets\words_alpha.txt" />
+    <None Remove="assets\common-six-letter-words.txt" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="assets\cspell-filtered_en_US.txt">
@@ -20,6 +21,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="assets\words_alpha.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="assets\common-six-letter-words.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>

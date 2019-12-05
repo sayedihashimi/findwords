@@ -21,7 +21,9 @@ namespace FindWords.Test {
             string destpath = Path.Combine(
                 fileHelper.GetApplicationRoot(),
                 $"test-sixletterwords-{DateTime.Now.ToString("yyyyMMdd-hh-mm-ss")}.txt");
-            using var readerFileStream = new FileStream(fileHelper.GetPathToRealDictionaryFile(), FileMode.Open, FileAccess.Read);
+            string path = fileHelper.GetPathToRealDictionaryFile();
+            path = @"/Users/sayedhashimi/data/mycode/OSS/google-10000-english/google-10000-english-usa-no-swears-medium.txt";
+            using var readerFileStream = new FileStream(path, FileMode.Open, FileAccess.Read);
             using var reader = new StreamReader(readerFileStream);
 
             using var outputFileStream = new FileStream(destpath, FileMode.Create, FileAccess.ReadWrite);
@@ -34,6 +36,7 @@ namespace FindWords.Test {
                 }
             }
 
+            await outputFileStream.FlushAsync();
             await outputWriter.FlushAsync();
         }
 
