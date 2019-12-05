@@ -17,10 +17,14 @@ namespace FindWords.Shared {
             return await BuildFrom(fileStream);
         }
 
+        /// <summary>
+        /// This will return the tree built from a word file that is an embedded resource.
+        /// </summary>
+        /// <returns></returns>
         public async Task<IWordTree> BuildFromResource() {
             return await BuildFromResource(
-                typeof(WordTreeBuilder).GetTypeInfo().Assembly,
-                $"FindWords.Shared.assets.{DefaultWordFile}");
+                            typeof(WordTreeBuilder).GetTypeInfo().Assembly,
+                            $"FindWords.Shared.assets.{DefaultWordFile}");
         }
 
         public async Task<IWordTree>BuildFromResource(Assembly assembly, string resxName) {
@@ -31,20 +35,17 @@ namespace FindWords.Shared {
             return await BuildFrom(resource);
         }
 
-        public async Task<IWordTree>BuildFrom(Stream stream) {
+        public async Task<IWordTree> BuildFrom(Stream stream) {
             Debug.Assert(stream != null);
 
             using var reader = new StreamReader(stream);
 
             IWordTree tree = new WordTree();
-            int linesProcessed = 0;
             string currentLine;
             while ((currentLine = await reader.ReadLineAsync()) != null) {
                 tree.AddWord(currentLine);
-                linesProcessed++;
             }
 
-            Console.WriteLine($"lines: {linesProcessed}");
             return tree;
         }
     }
