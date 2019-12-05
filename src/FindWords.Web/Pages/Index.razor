@@ -6,6 +6,11 @@
         {
             <button class="btn btn-outline-primary btn-lg">@ch</button>
         }
+
+
+        <br/>
+        <button class="btn btn-dark" @onclick="OnPreviousClick">◀</button>
+        <button class="btn btn-dark" @onclick="OnNextClick">▶</button>
     </div>
 
 @code {
@@ -14,5 +19,12 @@
     protected override void OnInitialized() {
         word = SixLetter.GetNextWord();
         base.OnInitialized();
+    }
+
+    public void OnNextClick() {
+        word = SixLetter.GetNextWord();
+    }
+    public void OnPreviousClick() {
+        word = SixLetter.GetPreviousWord();
     }
 }
