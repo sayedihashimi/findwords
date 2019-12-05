@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using FindWords.Web.Data;
+using FindWords.Shared;
 
 namespace FindWords.Web {
     public class Startup {
@@ -25,6 +26,7 @@ namespace FindWords.Web {
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddSingleton<WeatherForecastService>();
+            services.AddScoped<ISixLetterWordService, SixLetterWordService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

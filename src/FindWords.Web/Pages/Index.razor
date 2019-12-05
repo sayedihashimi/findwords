@@ -1,5 +1,18 @@
 ﻿@page "/"
+@inject ISixLetterWordService SixLetter
 
-<h1>Hello, world!</h1>
+    <div id="maincontent">
+        @foreach (var ch in word.ToCharArray())
+        {
+            <button class="btn btn-outline-primary btn-lg">@ch</button>
+        }
+    </div>
 
-Welcome to your new app.
+@code {
+    string word;
+
+    protected override void OnInitialized() {
+        word = SixLetter.GetNextWord();
+        base.OnInitialized();
+    }
+}

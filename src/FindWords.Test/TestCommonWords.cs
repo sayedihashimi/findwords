@@ -8,7 +8,7 @@ namespace FindWords.Test {
     public class TestCommonWords {
         [Fact]
         public async Task Test_Read_GetCommonSixLetterWordsAsync() {
-            var cw = new CommonWords();
+            var cw = new SixLetterWordService();
             List<string> words = await cw.GetCommonSixLetterWordsAsync();
 
             Assert.NotNull(words);
