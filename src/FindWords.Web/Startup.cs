@@ -27,6 +27,10 @@ namespace FindWords.Web {
             services.AddServerSideBlazor();
             services.AddSingleton<WeatherForecastService>();
             services.AddScoped<ISixLetterWordService, SixLetterWordService>();
+            services.AddSingleton<IWordFinder, WordFinder>();
+            services.AddSingleton<IWordTree>(new WordTreeBuilder().BuildFromResource().Result);
+            //services.AddSingleton<IWordTree>((arg) => new WordTreeBuilder().BuildFromResource().Result);
+            // services.AddSingleton<IWordFinder>()
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

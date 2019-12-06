@@ -1,30 +1,71 @@
 ﻿@page "/"
 @inject ISixLetterWordService SixLetter
+@inject IWordTree WordTree
 
     <div id="maincontent">
-        @foreach (var ch in word.ToCharArray())
-        {
-            <button class="btn btn-outline-primary btn-lg">@ch</button>
+        @foreach (var ch in Word.ToCharArray()) {
+            <button class="btn btn-outline-primary btn-lg" @onclick="@(() => OnLetterClick(ch))">@ch</button>
+            currentIndex2++;
         }
 
-
+        <p>@currentGuess</p>
+        <p>@result</p>
+        <br/>
+        <button class="btn btn-dark">Submit</button>
         <br/>
         <button class="btn btn-dark" @onclick="OnPreviousClick">◀</button>
         <button class="btn btn-dark" @onclick="OnNextClick">▶</button>
     </div>
 
 @code {
-    string word;
+    int currentIndex2 = 0;
+
+    string currentGuess;
+    string result;
+
+    private string _word;
+    public string Word {
+        get { return _word; }
+        set {
+            _word = value;
+            currentGuess = string.Empty;
+            currentIndex2 = 0;
+        }
+    }
 
     protected override void OnInitialized() {
-        word = SixLetter.GetNextWord();
+        Word = SixLetter.GetNextWord();
+        currentIndex2 = 0;
         base.OnInitialized();
     }
 
     public void OnNextClick() {
-        word = SixLetter.GetNextWord();
+        Word = SixLetter.GetNextWord();
     }
     public void OnPreviousClick() {
-        word = SixLetter.GetPreviousWord();
+        Word = SixLetter.GetPreviousWord();
+    }
+
+    public void OnLetterClick(char ch) {
+        currentGuess += ch.ToString();
+        if (WordTree.IsWord(currentGuess)) {
+            result = "IS WORD";
+        }
+        else {
+            result = string.Empty;
+        }
+    }
+    public void OnLetterClick(int position) {
+        Console.WriteLine($"position: {position}");
+        if(position < 0) { return; }
+
+        currentGuess += (Word.ToCharArray()[position].ToString());
+
+        if (WordTree.IsWord(currentGuess)) {
+            result = "IS WORD";
+        }
+        else {
+            result = string.Empty;
+        }
     }
 }

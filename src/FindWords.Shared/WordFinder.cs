@@ -5,10 +5,10 @@ using System.IO;
 using System.Linq;
 
 namespace FindWords.Shared {
-    public class WordFinder {
+    public class WordFinder : IWordFinder {
         public WordFinder(IWordTree wordTree) {
             WordTree = wordTree;
-
+            MinWordLength = 3;
         }
 
         public IWordTree WordTree { get; set; }
@@ -18,10 +18,10 @@ namespace FindWords.Shared {
         public List<string> FindWordsInString(string str) {
             Debug.Assert(str != null);
 
-            List<char[]>found = FindWordsIn(new char[0], str.ToCharArray());
+            List<char[]> found = FindWordsIn(new char[0], str.ToCharArray());
 
             List<string> foundAsStr = new List<string>();
-            foreach(var chstr in found) {
+            foreach (var chstr in found) {
                 foundAsStr.Add(new string(chstr));
             }
 
@@ -29,11 +29,11 @@ namespace FindWords.Shared {
             return foundAsStr.Distinct<string>().ToList();
         }
 
-        protected List<char[]> FindWordsIn(char[] prefix, char[]remaining) {
+        protected List<char[]> FindWordsIn(char[] prefix, char[] remaining) {
             Debug.Assert(prefix != null);
             Debug.Assert(remaining != null);
 
-            if(remaining.Length <= 0) {
+            if (remaining.Length <= 0) {
                 return new List<char[]>();
             }
 
@@ -41,7 +41,7 @@ namespace FindWords.Shared {
             // combine with prefix and then call again
             List<char[]> found = new List<char[]>();
 
-            for(int index = 0; index < remaining.Length; index++) {
+            for (int index = 0; index < remaining.Length; index++) {
                 char ch = remaining[index];
                 char[] newprefix = new char[prefix.Length + 1];
                 Array.Copy(prefix, newprefix, prefix.Length);
@@ -57,8 +57,8 @@ namespace FindWords.Shared {
 
                 char[] newremaining = new char[remaining.Length - 1];
                 int newremindex = 0;
-                for(int i = 0; i < remaining.Length; i++) {
-                    if(i == index) {
+                for (int i = 0; i < remaining.Length; i++) {
+                    if (i == index) {
                         // skip this one
                         continue;
                     }

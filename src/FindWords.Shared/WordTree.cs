@@ -7,6 +7,8 @@ namespace FindWords.Shared {
     public class WordTree : IWordTree {
         protected WordTreeNode RootNode = new WordTreeNode(char.MinValue, null, false);
 
+        public int MinWordLength { get; set; } = 3;
+
         public void AddWord(string word) {
             Debug.Assert(!string.IsNullOrWhiteSpace(word));
             InsertAfter(RootNode, word.ToCharArray(), true);
@@ -14,6 +16,7 @@ namespace FindWords.Shared {
 
         public bool IsWord(string word) {
             Debug.Assert(!string.IsNullOrWhiteSpace(word));
+            if(word.Length < MinWordLength) { return false; }
             var result = FindNode(word);
             return result == null ? false : result.IsWord;
         }
