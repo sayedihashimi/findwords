@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <Folder Include="assets\" />
+    <Folder Include="Extensions\" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="assets\cspell-filtered_en_US.txt" />

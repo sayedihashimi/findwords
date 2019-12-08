@@ -1,27 +1,39 @@
 ﻿@page "/"
 @inject ISixLetterWordService SixLetter
 @inject IWordTree WordTree
+@using Microsoft.AspNetCore.Components.Web
+
+@* TODO: Need to add a list of possible words as well here *@
 
     <div id="maincontent">
-        @foreach (var ch in Word.ToCharArray()) {
-            <button class="btn btn-outline-primary btn-lg" @onclick="@(() => OnLetterClick(ch))">@ch</button>
-            currentIndex2++;
+        @foreach (var ch in CharViewModels) {
+            <button class="btn btn-outline-primary btn-lg" btnwasclicked="@(ch.HasBeenClicked)"
+                    disabled="@(ch.HasBeenClicked)"
+                    @onclick="@(() => OnLetterClick2(ch))">@ch.Character</button>
         }
 
-        <p>@currentGuess</p>
-        <p>@result</p>
+        <p class="currentGuess">@currentGuess</p>
+        <p class="isWordResult">@result</p>
         <br/>
-        <button class="btn btn-dark">Submit</button>
+        <button class="btn btn-dark" @onclick="OnSubmitClick">Submit</button>
+        <button class="btn btn-dark" @onclick="OnClearClick">Clear</button>
+        <button class="btn btn-dark" @onclick="OnShuffleClick">Shuffle</button>
         <br/>
         <button class="btn btn-dark" @onclick="OnPreviousClick">◀</button>
         <button class="btn btn-dark" @onclick="OnNextClick">▶</button>
+
+        <ul id="foundwordscontainer">
+            @foreach(string word in FoundWords) {
+                <li>@word</li>
+            }
+        </ul>
     </div>
 
 @code {
-    int currentIndex2 = 0;
-
     string currentGuess;
     string result;
+    List<CharacterViewModel> CharViewModels = new List<CharacterViewModel>();
+    List<string> FoundWords = new List<string>();
 
     private string _word;
     public string Word {
@@ -29,43 +41,75 @@
         set {
             _word = value;
             currentGuess = string.Empty;
-            currentIndex2 = 0;
+            UpdateCharsFromWord();
         }
     }
+    protected void UpdateCharsFromWord() {
+        CharViewModels.Clear();
+        if (string.IsNullOrEmpty(Word)) { return; }
 
+        foreach(char c in Word.ToCharArray()) {
+            var cvm = new CharacterViewModel() {
+                Character = c,
+                HasBeenClicked = false
+            };
+            CharViewModels.Add(cvm);
+        }
+    }
     protected override void OnInitialized() {
-        Word = SixLetter.GetNextWord();
-        currentIndex2 = 0;
+        Word = SixLetter.GetNextWord().Shuffle();
         base.OnInitialized();
     }
 
     public void OnNextClick() {
-        Word = SixLetter.GetNextWord();
+        Word = SixLetter.GetNextWord().Shuffle();
     }
     public void OnPreviousClick() {
-        Word = SixLetter.GetPreviousWord();
+        Word = SixLetter.GetPreviousWord().Shuffle();
     }
 
-    public void OnLetterClick(char ch) {
-        currentGuess += ch.ToString();
-        if (WordTree.IsWord(currentGuess)) {
-            result = "IS WORD";
-        }
-        else {
+    public void OnLetterClick2(CharacterViewModel chvm) {
+        currentGuess += chvm.Character;
+        chvm.HasBeenClicked = true;
+        if (!WordTree.IsWord(currentGuess)) {
             result = string.Empty;
         }
+
+        StateHasChanged();
+    }
+
+    public void OnLetterClick(MouseEventArgs args, char ch) {
+        currentGuess += ch.ToString();
     }
     public void OnLetterClick(int position) {
         Console.WriteLine($"position: {position}");
         if(position < 0) { return; }
 
         currentGuess += (Word.ToCharArray()[position].ToString());
+    }
 
+    public void OnClearClick() {
+        currentGuess = string.Empty;
+        result = string.Empty;
+        UpdateCharsFromWord();
+    }
+    public void OnShuffleClick() {
+        // Word = Word.Shuffle();
+        CharViewModels = CharViewModels.Randomize().ToList();
+    }
+    public void OnSubmitClick() {
+        result = string.Empty;
         if (WordTree.IsWord(currentGuess)) {
-            result = "IS WORD";
+            if (!FoundWords.Contains(currentGuess)) {
+                FoundWords.Add(currentGuess);
+                result = "✔️";
+            }
+            else {
+                result = "Word already added";
+            }
         }
-        else {
-            result = string.Empty;
-        }
+        CharViewModels.ForEach((ch) => ch.HasBeenClicked = false);
+        currentGuess = string.Empty;
+        StateHasChanged();
     }
 }

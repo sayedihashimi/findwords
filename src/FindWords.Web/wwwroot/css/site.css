@@ -27,6 +27,17 @@ app {
     width:100%;
 }
 
+button[btnwasclicked]{
+    background-color: red;
+    color: green;
+}
+
+.currentGuess, .isWordResult {
+    height: 2em;
+    background-color: red;
+}
+
+
 
 
 
