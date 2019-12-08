@@ -45,8 +45,11 @@ namespace FindWords.Shared {
             while ((currentLine = await reader.ReadLineAsync()) != null) {
                 tree.AddWord(currentLine);
             }
-
             return tree;
+        }
+
+        public async Task<IWordFinder> BuidWordFinderAsync() {
+            return new WordFinder(await BuildFromResource());
         }
     }
 }

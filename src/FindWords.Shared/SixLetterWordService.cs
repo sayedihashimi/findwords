@@ -4,6 +4,8 @@ using System.IO;
 using System.Net.Http.Headers;
 using System.Reflection;
 using System.Threading.Tasks;
+using FindWords.Shared.Extensions;
+using System.Linq;
 
 namespace FindWords.Shared {
     public class SixLetterWordService : ISixLetterWordService {
@@ -32,7 +34,7 @@ namespace FindWords.Shared {
         public string GetNextWordRandom() {
             _randomIndex ??= CreateIndexForRandomAccess();
             _currentRandomIndex = (_currentRandomIndex + 1) % (_randomIndex.Count);
-            return _commonSixLetterWords[_currentRandomIndex];
+            return _commonSixLetterWords[_randomIndex[_currentRandomIndex]];
         }
 
         public string GetPreviousWordRandom() {
@@ -69,7 +71,7 @@ namespace FindWords.Shared {
                 indexList.Add(i);
             }
 
-            indexList.Sort();
+            indexList = indexList.Randomize().ToList();
 
             return indexList;
         }

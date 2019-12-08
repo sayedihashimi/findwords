@@ -1,6 +1,8 @@
 ﻿@page "/"
 @inject ISixLetterWordService SixLetter
 @inject IWordTree WordTree
+@inject IWordFinder WordFinder
+
 @using Microsoft.AspNetCore.Components.Web
 
 @* TODO: Need to add a list of possible words as well here *@
@@ -22,6 +24,8 @@
         <button class="btn btn-dark" @onclick="OnPreviousClick">◀</button>
         <button class="btn btn-dark" @onclick="OnNextClick">▶</button>
 
+        <p>Words remaining: @(PossibleWords.Count - FoundWords.Count)</p>
+
         <ul id="foundwordscontainer">
             @foreach(string word in FoundWords) {
                 <li>@word</li>
@@ -34,6 +38,9 @@
     string result;
     List<CharacterViewModel> CharViewModels = new List<CharacterViewModel>();
     List<string> FoundWords = new List<string>();
+    List<string> PossibleWords = new List<string>();
+    // mostly for testing, doesn't really need a user option
+    bool randomizeWordList = true;
 
     private string _word;
     public string Word {
@@ -42,6 +49,7 @@
             _word = value;
             currentGuess = string.Empty;
             UpdateCharsFromWord();
+            InitPossibleWords();
         }
     }
     protected void UpdateCharsFromWord() {
@@ -56,16 +64,35 @@
             CharViewModels.Add(cvm);
         }
     }
+    protected void InitPossibleWords() {
+        PossibleWords = WordFinder.FindWordsInString(Word);
+    }
     protected override void OnInitialized() {
-        Word = SixLetter.GetNextWord().Shuffle();
+        if (randomizeWordList) {
+            Word = SixLetter.GetNextWordRandom().Shuffle();
+        }
+        else {
+            Word = SixLetter.GetNextWord().Shuffle();
+        }
+
         base.OnInitialized();
     }
 
     public void OnNextClick() {
-        Word = SixLetter.GetNextWord().Shuffle();
+        if (randomizeWordList) {
+            Word = SixLetter.GetNextWordRandom().Shuffle();
+        }
+        else {
+            Word = SixLetter.GetNextWord().Shuffle();
+        }
     }
     public void OnPreviousClick() {
-        Word = SixLetter.GetPreviousWord().Shuffle();
+        if (randomizeWordList) {
+            Word = SixLetter.GetPreviousWordRandom().Shuffle();
+        }
+        else {
+            Word = SixLetter.GetPreviousWord().Shuffle();
+        }
     }
 
     public void OnLetterClick2(CharacterViewModel chvm) {
@@ -78,23 +105,12 @@
         StateHasChanged();
     }
 
-    public void OnLetterClick(MouseEventArgs args, char ch) {
-        currentGuess += ch.ToString();
-    }
-    public void OnLetterClick(int position) {
-        Console.WriteLine($"position: {position}");
-        if(position < 0) { return; }
-
-        currentGuess += (Word.ToCharArray()[position].ToString());
-    }
-
     public void OnClearClick() {
         currentGuess = string.Empty;
         result = string.Empty;
         UpdateCharsFromWord();
     }
     public void OnShuffleClick() {
-        // Word = Word.Shuffle();
         CharViewModels = CharViewModels.Randomize().ToList();
     }
     public void OnSubmitClick() {
@@ -107,6 +123,9 @@
             else {
                 result = "Word already added";
             }
+        }
+        else {
+            result = "Not a word";
         }
         CharViewModels.ForEach((ch) => ch.HasBeenClicked = false);
         currentGuess = string.Empty;
