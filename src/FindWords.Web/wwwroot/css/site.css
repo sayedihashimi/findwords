@@ -39,9 +39,19 @@ app {
     font-family: Consolas, monaco, monospace;
     text-transform: uppercase;
 }
+.navbutton{
+    height: 50px;
+    width: 50px;
+}
 
-
-
+#resultsContainer p {
+    font-size: 50pt;
+    font-family: Consolas, monaco, monospace;
+    text-transform: uppercase;
+}
+#navContainer{
+    color:red;
+}
 
 
 .content {

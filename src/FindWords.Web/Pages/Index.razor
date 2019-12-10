@@ -14,15 +14,21 @@
                     @onclick="@(() => OnLetterClick(ch))">@ch.Character</button>
         }
 
-        <p class="currentGuess">@currentGuess</p>
-        <p class="isWordResult">@result</p>
-        <br/>
-        <button class="btn btn-dark" @onclick="OnSubmitClick">Submit</button>
-        <button class="btn btn-dark" @onclick="OnClearClick">Clear</button>
-        <button class="btn btn-dark" @onclick="OnShuffleClick">Shuffle</button>
-        <br/>
-        <button class="btn btn-dark" @onclick="OnPreviousClick">◀</button>
-        <button class="btn btn-dark" @onclick="OnNextClick">▶</button>
+        <div id="resultsContainer">
+            <p class="currentGuess">@currentGuess</p>
+            <p class="isWordResult">@result</p>
+        </div>
+
+        <div>
+            <button class="btn btn-outline-secondary" @onclick="OnSubmitClick">Submit</button>
+            <button class="btn btn-outline-secondary" @onclick="OnClearClick">Erase</button>
+            <button class="btn btn-outline-secondary" @onclick="OnShuffleClick">Mix letters</button>
+        </div>
+
+        <div id="navContainer">
+            <button class="navbutton btn btn-outline-primary" @onclick="OnPreviousClick">◀</button>
+            <button class="navbutton btn btn-outline-primary" @onclick="OnNextClick">▶</button>
+        </div>
 
         <p>Words remaining: @(PossibleWords.Count - FoundWords.Count)</p>
 
@@ -102,7 +108,7 @@
         if (WordTree.IsWord(currentGuess)) {
             if (!FoundWords.Contains(currentGuess)) {
                 FoundWords.Add(currentGuess);
-                result = "✔️";
+                result = "✓";
             }
             else {
                 result = "Word already added";
