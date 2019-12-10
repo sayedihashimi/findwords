@@ -14,21 +14,39 @@ namespace FindWords.Shared {
         private int _currentIndex = 0;
         private int _currentRandomIndex = 0;
 
+        public bool Randomize { get; set; }
+
         public SixLetterWordService() {
             _commonSixLetterWords = ReadSixLetterWordsFromResx().Result;
             _randomIndex = CreateIndexForRandomAccess();
         }
 
         public string GetNextWord() {
-            _currentIndex = (_currentIndex + 1) % (_commonSixLetterWords.Count);
-            return _commonSixLetterWords[_currentIndex];
+            if (Randomize) {
+                _randomIndex ??= CreateIndexForRandomAccess();
+                _currentRandomIndex = (_currentRandomIndex + 1) % (_randomIndex.Count);
+                return _commonSixLetterWords[_randomIndex[_currentRandomIndex]];
+            }
+            else {
+                _currentIndex = (_currentIndex + 1) % (_commonSixLetterWords.Count);
+                return _commonSixLetterWords[_currentIndex];
+            }
         }
 
         public string GetPreviousWord() {
-            _currentIndex = _currentIndex - 1;
-            if(_currentIndex < 0) { _currentIndex = _commonSixLetterWords.Count - 1; }
+            if (Randomize) {
+                _randomIndex ??= CreateIndexForRandomAccess();
+                _currentRandomIndex = _currentRandomIndex - 1;
+                if (_currentRandomIndex < 0) { _currentRandomIndex = _randomIndex.Count - 1; }
 
-            return _commonSixLetterWords[_currentIndex];
+                return _commonSixLetterWords[_currentRandomIndex];
+            }
+            else {
+                _currentIndex = _currentIndex - 1;
+                if (_currentIndex < 0) { _currentIndex = _commonSixLetterWords.Count - 1; }
+
+                return _commonSixLetterWords[_currentIndex];
+            }
         }
 
         public string GetNextWordRandom() {

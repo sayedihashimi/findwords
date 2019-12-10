@@ -9,9 +9,9 @@
 
     <div id="maincontent">
         @foreach (var ch in CharViewModels) {
-            <button class="btn btn-outline-primary btn-lg" btnwasclicked="@(ch.HasBeenClicked)"
+            <button class="charbtn btn btn-outline-primary btn-lg" btnwasclicked="@(ch.HasBeenClicked)"
                     disabled="@(ch.HasBeenClicked)"
-                    @onclick="@(() => OnLetterClick2(ch))">@ch.Character</button>
+                    @onclick="@(() => OnLetterClick(ch))">@ch.Character</button>
         }
 
         <p class="currentGuess">@currentGuess</p>
@@ -49,7 +49,7 @@
             _word = value;
             currentGuess = string.Empty;
             UpdateCharsFromWord();
-            InitPossibleWords();
+            UpdatePossibleWords();
         }
     }
     protected void UpdateCharsFromWord() {
@@ -64,38 +64,22 @@
             CharViewModels.Add(cvm);
         }
     }
-    protected void InitPossibleWords() {
+    protected void UpdatePossibleWords() {
         PossibleWords = WordFinder.FindWordsInString(Word);
     }
     protected override void OnInitialized() {
-        if (randomizeWordList) {
-            Word = SixLetter.GetNextWordRandom().Shuffle();
-        }
-        else {
-            Word = SixLetter.GetNextWord().Shuffle();
-        }
-
-        base.OnInitialized();
+        SixLetter.Randomize = randomizeWordList;
+        Word = SixLetter.GetNextWord().Shuffle();
     }
 
     public void OnNextClick() {
-        if (randomizeWordList) {
-            Word = SixLetter.GetNextWordRandom().Shuffle();
-        }
-        else {
-            Word = SixLetter.GetNextWord().Shuffle();
-        }
+        Word = SixLetter.GetNextWord().Shuffle();
     }
     public void OnPreviousClick() {
-        if (randomizeWordList) {
-            Word = SixLetter.GetPreviousWordRandom().Shuffle();
-        }
-        else {
-            Word = SixLetter.GetPreviousWord().Shuffle();
-        }
+        Word = SixLetter.GetPreviousWord().Shuffle();
     }
 
-    public void OnLetterClick2(CharacterViewModel chvm) {
+    public void OnLetterClick(CharacterViewModel chvm) {
         currentGuess += chvm.Character;
         chvm.HasBeenClicked = true;
         if (!WordTree.IsWord(currentGuess)) {

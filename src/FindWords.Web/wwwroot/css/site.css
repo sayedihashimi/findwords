@@ -32,8 +32,13 @@ app {
 #foundwordscontainer{
     list-style:none;
 }
-
-
+.charbtn {
+    height: 150px;
+    width: 150px;
+    font-size: 80pt;
+    font-family: Consolas, monaco, monospace;
+    text-transform: uppercase;
+}
 
 
 
