@@ -30,8 +30,8 @@ app {
     height: 2em;
     margin: 0;
 }
-#foundwordscontainer{
-    list-style:none;
+#foundwordscontainer, #remainingwordscontainer {
+    list-style: none;
 }
 .charbtn {
     height: 15vw;
@@ -58,6 +58,18 @@ app {
 #navContainer{
     margin-top: 20px;
 }
+
+.column {
+    float: left;
+    width: 50%;
+}
+
+.wordsContainer:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
 
 @media only screen and (min-width: 1500px) {
     .charbtn {

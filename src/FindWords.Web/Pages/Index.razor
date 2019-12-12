@@ -1,4 +1,5 @@
 ﻿@page "/"
+@using System.Linq;
 @inject ISixLetterWordService SixLetter
 @inject IWordTree WordTree
 @inject IWordFinder WordFinder
@@ -8,11 +9,14 @@
 @* TODO: Need to add a list of possible words as well here *@
 
     <div id="maincontent">
-        @foreach (var ch in CharViewModels) {
+        @foreach (var ch in CharViewModels)
+        {
             <button class="charbtn btn btn-outline-primary btn-lg" btnwasclicked="@(ch.HasBeenClicked)"
                     disabled="@(ch.HasBeenClicked)"
-                    @onclick="@(() => OnLetterClick(ch))">@ch.Character</button>
-        }
+                    @onclick="@(() => OnLetterClick(ch))">
+                @ch.Character
+                </button>
+            }
 
         <div id="resultsContainer">
             <p class="currentGuess">@currentGuess @result</p>
@@ -28,15 +32,32 @@
         <div id="navContainer">
             <button class="navbutton btn btn-outline-primary" @onclick="OnPreviousClick">◀</button>
             <button class="navbutton btn btn-outline-primary" @onclick="OnNextClick">▶</button>
+            <a href="#" @onclick="OnShowRemainingClick">Show remaining words</a>
         </div>
 
         <p>Words remaining: @(PossibleWords.Count - FoundWords.Count)</p>
 
-        <ul id="foundwordscontainer">
-            @foreach(string word in FoundWords) {
-                <li>@word</li>
-            }
-        </ul>
+        <div class="wordsContainer">
+            <div class="column">
+                <h3>found words</h3>
+                <ul id="foundwordscontainer">
+                    @foreach (string word in FoundWords)
+                    {
+                        <li>@word</li>
+                    }
+                </ul>
+            </div>
+            <div class="column" hidden="@(!showRemainingWords)">
+                <h3>remaining words</h3>
+                <ul id="remainingwordscontainer">
+                    @foreach(string word in GetRemainingWords()) {
+                        <li>@word</li>
+                    }
+                </ul>
+            </div>
+        </div>
+
+        
     </div>
 
 @code {
@@ -47,6 +68,7 @@
     List<string> PossibleWords = new List<string>();
     // mostly for testing, doesn't really need a user option
     bool randomizeWordList = true;
+    bool showRemainingWords = false;
 
     private string _word;
     public string Word {
@@ -73,11 +95,20 @@
     protected void UpdatePossibleWords() {
         PossibleWords = WordFinder.FindWordsInString(Word);
     }
+    protected List<string> GetRemainingWords() {
+        List<string> allwords = new List<string>();
+        allwords.AddRange(PossibleWords);
+        allwords.RemoveAll((word) => FoundWords.Contains(word));
+        return allwords;
+    }
     protected override void OnInitialized() {
         SixLetter.Randomize = randomizeWordList;
         Word = SixLetter.GetNextWord().Shuffle();
     }
 
+    public void OnShowRemainingClick() {
+        showRemainingWords = !showRemainingWords;
+    }
     public void OnNextClick() {
         Word = SixLetter.GetNextWord().Shuffle();
         FoundWords = new List<string>();
