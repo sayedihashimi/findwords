@@ -21,7 +21,7 @@ app {
 }
 
 #maincontent{
-    margin:20px;
+    margin-top:5px;
     text-align:center;
     width:100%;
 }
@@ -34,19 +34,23 @@ app {
     list-style:none;
 }
 .charbtn {
-    height: 150px;
-    width: 150px;
-    font-size: 80pt;
+    height: 15vw;
+    width: 15vw;
+    font-size: 7vw;
+
     font-family: Consolas, monaco, monospace;
     text-transform: uppercase;
 }
-.navbutton{
+.actionbutton {
+    font-size: 4vw;
+}
+.navbutton {
     height: 50px;
     width: 50px;
 }
 
 #resultsContainer p {
-    font-size: 50pt;
+    font-size: 4vw;
     font-family: Consolas, monaco, monospace;
     text-transform: uppercase;
     margin: 0;
@@ -54,6 +58,19 @@ app {
 #navContainer{
     margin-top: 20px;
 }
+
+@media only screen and (min-width: 1500px) {
+    .charbtn {
+        height: 8vw;
+        width: 8vw;
+        font-size: 4vw;
+    }
+
+    .actionbutton {
+        font-size: 1vw;
+    }
+}
+
 
 
 .content {
