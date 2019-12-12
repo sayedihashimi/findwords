@@ -28,6 +28,7 @@ app {
 
 .currentGuess, .isWordResult {
     height: 2em;
+    margin: 0;
 }
 #foundwordscontainer{
     list-style:none;
@@ -48,6 +49,7 @@ app {
     font-size: 50pt;
     font-family: Consolas, monaco, monospace;
     text-transform: uppercase;
+    margin: 0;
 }
 #navContainer{
     margin-top: 20px;

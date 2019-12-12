@@ -15,8 +15,8 @@
         }
 
         <div id="resultsContainer">
-            <p class="currentGuess">@currentGuess</p>
-            <p class="isWordResult">@result</p>
+            <p class="currentGuess">@currentGuess @result</p>
+            @*<p class="isWordResult">@result</p>*@
         </div>
 
         <div>
@@ -80,9 +80,13 @@
 
     public void OnNextClick() {
         Word = SixLetter.GetNextWord().Shuffle();
+        FoundWords = new List<string>();
+        UpdatePossibleWords();
     }
     public void OnPreviousClick() {
         Word = SixLetter.GetPreviousWord().Shuffle();
+        FoundWords = new List<string>();
+        UpdatePossibleWords();
     }
 
     public void OnLetterClick(CharacterViewModel chvm) {
