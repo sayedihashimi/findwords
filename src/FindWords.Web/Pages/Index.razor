@@ -8,7 +8,7 @@
 
 @* TODO: Need to add a list of possible words as well here *@
 
-    <div id="maincontent">
+    <div id="maincontent" @onkeydown="@((k)=>OnKeyDown(k))">
         @foreach (var ch in CharViewModels)
         {
             <button class="charbtn btn btn-outline-primary btn-lg" btnwasclicked="@(ch.HasBeenClicked)"
@@ -110,6 +110,10 @@
         Word = SixLetter.GetNextWord().Shuffle();
     }
 
+    public void OnKeyDown(KeyboardEventArgs args) {
+        string msg = $"Key: [{args.Key}] Code: [{args.Code}] ";
+        Console.WriteLine(msg);
+    }
     public void OnShowRemainingClick() {
         showRemainingWords = !showRemainingWords;
     }
@@ -147,6 +151,9 @@
     }
     public void OnSubmitClick() {
         result = string.Empty;
+
+        if (string.IsNullOrEmpty(currentGuess)) { return; }
+
         if (WordTree.IsWord(currentGuess)) {
             if (!FoundWords.Contains(currentGuess)) {
                 FoundWords.Add(currentGuess);

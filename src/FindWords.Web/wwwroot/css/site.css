@@ -2,7 +2,7 @@
 
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    
+    color: white;
 }
 
 a, .btn-link {
@@ -64,7 +64,11 @@ app {
     float: left;
     width: 50%;
 }
-
+.wordlist {
+    display: inline-grid;
+    margin-right: 10px;
+    margin-left: 10px;
+}
 .wordsContainer:after {
     content: "";
     display: table;
