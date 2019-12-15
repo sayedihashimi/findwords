@@ -57,7 +57,10 @@
             </div>
         </div>
 
-        
+        <div class="pyro" hidden="@(!showFireworks)">
+            <div class="before"></div>
+            <div class="after"></div>
+        </div>
     </div>
 
 @code {
@@ -69,6 +72,7 @@
     // mostly for testing, doesn't really need a user option
     bool randomizeWordList = true;
     bool showRemainingWords = false;
+    bool showFireworks = false;
 
     private string _word;
     public string Word {
@@ -138,12 +142,18 @@
     public void OnShuffleClick() {
         CharViewModels = CharViewModels.Randomize().ToList();
     }
+    public void ShowFireworks() {
+        showFireworks = true;
+    }
     public void OnSubmitClick() {
         result = string.Empty;
         if (WordTree.IsWord(currentGuess)) {
             if (!FoundWords.Contains(currentGuess)) {
                 FoundWords.Add(currentGuess);
                 result = "✓";
+                if(FoundWords.Count == PossibleWords.Count) {
+                    ShowFireworks();
+                }
             }
             else {
                 result = "Word already added";
@@ -154,6 +164,7 @@
         }
         CharViewModels.ForEach((ch) => ch.HasBeenClicked = false);
         currentGuess = string.Empty;
+
         StateHasChanged();
     }
 }
