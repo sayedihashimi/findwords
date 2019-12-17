@@ -48,6 +48,7 @@ app {
 .navbutton {
     height: 50px;
     width: 50px;
+    background-color:white;
 }
 
 #resultsContainer p {
@@ -87,6 +88,23 @@ app {
         font-size: 1vw;
     }
 }
+
+
+
+
+
+
+.hlist {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+.hlist>li{
+    display:inline;
+    margin-right: 7px;
+}
+
+
 
 
 

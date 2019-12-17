@@ -15,8 +15,8 @@
                     disabled="@(ch.HasBeenClicked)"
                     @onclick="@(() => OnLetterClick(ch))">
                 @ch.Character
-                </button>
-            }
+            </button>
+        }
 
         <div id="resultsContainer">
             <p class="currentGuess">@currentGuess @result</p>
@@ -30,31 +30,40 @@
         </div>
 
         <div id="navContainer">
-            <button class="navbutton btn btn-outline-primary" @onclick="OnPreviousClick">◀</button>
-            <button class="navbutton btn btn-outline-primary" @onclick="OnNextClick">▶</button>
+            <button class="navbutton btn btn-outline-primary" @onclick="OnPreviousClick">
+                <img src="/images/previous.svg" alt="previous" />
+            </button>
+            <button class="navbutton btn btn-outline-primary" @onclick="OnNextClick">
+                <img src="/images/next.svg" alt="next" />
+            </button>
             <a href="#" @onclick="OnShowRemainingClick">Show remaining words</a>
         </div>
 
         <p>Words remaining: @(PossibleWords.Count - FoundWords.Count)</p>
 
-        <div class="wordsContainer">
-            <div class="column">
-                <h3>found words</h3>
-                <ul id="foundwordscontainer">
-                    @foreach (string word in FoundWords)
-                    {
-                        <li>@word</li>
-                    }
-                </ul>
-            </div>
-            <div class="column" hidden="@(!showRemainingWords)">
-                <h3>remaining words</h3>
-                <ul id="remainingwordscontainer">
-                    @foreach(string word in GetRemainingWords()) {
-                        <li>@word</li>
-                    }
-                </ul>
-            </div>
+        <ul class="hlist">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#news">News</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="#about">About</a></li>
+        </ul>
+
+        <div>
+            <h3>found words</h3>
+            <ul class="hlist">
+                @foreach (string word in FoundWords)
+                {
+                    <li>@word</li>
+                }
+            </ul>
+        </div>
+        <div>
+            <h3 hidden="@(!showRemainingWords)">remaining words</h3>
+            <ul class="hlist" hidden="@(!showRemainingWords)">
+                @foreach(string word in GetRemainingWords()) {
+                    <li>@word</li>
+                }
+            </ul>
         </div>
 
         <div class="pyro" hidden="@(!showFireworks)">
