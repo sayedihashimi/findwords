@@ -15,7 +15,8 @@ namespace FindWords.Test {
             string[] contentLines = content.Split("\n", StringSplitOptions.RemoveEmptyEntries);
 
             foreach(var line in contentLines) {
-                await fileWriter.WriteLineAsync(line);
+                if (string.IsNullOrEmpty(line)) { continue; }
+                await fileWriter.WriteLineAsync(line.Trim());
             }
 
             return tempfilepath;
