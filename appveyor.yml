@@ -3,8 +3,5 @@ image: Visual Studio 2019
 configuration: Release
 test: off
 
-build:
-  project: build.ps1
-  verbosity: normal
-
-
+build_script:
+  - ps: build.ps1
