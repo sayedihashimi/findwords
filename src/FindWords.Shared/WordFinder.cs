@@ -47,7 +47,7 @@ namespace FindWords.Shared {
                 Array.Copy(prefix, newprefix, prefix.Length);
                 newprefix[newprefix.Length - 1] = ch;
 
-                Console.WriteLine(newprefix);
+                // Console.WriteLine(newprefix);
                 // TODO: Update wortree to use char[]
                 var newprefixstr = new string(newprefix);
                 if (newprefixstr.Length >= MinWordLength &&
