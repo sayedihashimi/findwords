@@ -15,7 +15,7 @@ namespace FindWords.Test {
         /// This can be used to re-create the six letter word file.
         /// It is not needed to run these tests locally or on CI, just on an as needed basis.
         /// </summary>
-        [Fact]
+        // [Fact]
         public async Task CreateSixLetterWordFileAsync() {
             var fileHelper = new FileHelper();
             string destpath = Path.Combine(
