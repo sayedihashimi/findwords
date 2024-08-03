@@ -19,6 +19,7 @@ namespace FindWords.Test {
 		[Fact]
 		public void TestIsWord01() {
 			var tree = new MemEfficientWordTree();
+			tree.AddWord("cat");
 			Assert.True(tree.IsWord("cat"));
 			Assert.False(tree.IsWord("cato"));
 			Assert.False(tree.IsWord("c"));
