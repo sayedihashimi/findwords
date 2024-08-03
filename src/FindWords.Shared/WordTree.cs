@@ -24,7 +24,7 @@ namespace FindWords.Shared {
         private WordTreeNode InsertAfter(WordTreeNode currentNode, char[] word, bool isWord) {
             Debug.Assert(currentNode != null);
 
-            if (word == null || word.Length <= 0) {
+            if (word == null || word.Length == 0) {
                 return null;
             }
 
@@ -64,7 +64,7 @@ namespace FindWords.Shared {
         private WordTreeNode FindNodeAfter(WordTreeNode currentNode, char[] letters) {
             Debug.Assert(currentNode != null);
 
-            if (letters == null || letters.Length <= 0) {
+            if (letters == null || letters.Length == 0) {
                 return currentNode;
             }
 

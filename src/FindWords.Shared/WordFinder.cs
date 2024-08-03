@@ -33,7 +33,7 @@ namespace FindWords.Shared {
             Debug.Assert(prefix != null);
             Debug.Assert(remaining != null);
 
-            if (remaining.Length <= 0) {
+            if (remaining.Length == 0) {
                 return new List<char[]>();
             }
 

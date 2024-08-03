@@ -8,7 +8,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FindWords.Shared", "FindWor
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FindWords.Test", "FindWords.Test\FindWords.Test.csproj", "{EF2150FE-E4A6-4022-A4AB-81BE2F153FD2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FindWords.Console", "FindWords.Console\FindWords.Console.csproj", "{A5F99931-396B-47AA-BEDE-1BA82EA7047F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FindWords.Console", "FindWords.Console\FindWords.Console.csproj", "{A5F99931-396B-47AA-BEDE-1BA82EA7047F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FindWords.Benchmarks", "FindWords.Benchmarks\FindWords.Benchmarks.csproj", "{EF3D83A3-EF9A-4BF1-AD46-A4C1AA3D1D46}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -32,6 +34,10 @@ Global
 		{A5F99931-396B-47AA-BEDE-1BA82EA7047F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A5F99931-396B-47AA-BEDE-1BA82EA7047F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A5F99931-396B-47AA-BEDE-1BA82EA7047F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF3D83A3-EF9A-4BF1-AD46-A4C1AA3D1D46}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF3D83A3-EF9A-4BF1-AD46-A4C1AA3D1D46}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF3D83A3-EF9A-4BF1-AD46-A4C1AA3D1D46}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF3D83A3-EF9A-4BF1-AD46-A4C1AA3D1D46}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

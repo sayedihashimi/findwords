@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "FindWords.Benchmarks": {
+      "commandName": "Project",
+      "commandLineArgs": "memwordtree"
+    }
+  }
+}
